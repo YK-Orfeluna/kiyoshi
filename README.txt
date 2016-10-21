@@ -14,4 +14,4 @@ Use
 $python kiyoshi.py
 
 log
-16/10/20: ver.1.0
+16/10/21: ver.1.1

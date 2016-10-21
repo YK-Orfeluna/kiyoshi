@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*
 """ズン　ズンズン　ズンドコ　キ・ヨ・シ！！"""
 import numpy as np
-import time
-import cv2, random, sys
+import cv2
+import time, random, sys
 
 flag1 = 0						# ズン判定に使用
 flag2 = 0						# ドコ判定に使用	
-cnt = time.clock()
 
 zun1 = cv2.imread("image/zun1.png")
 zun2 = cv2.imread("image/zun2.png")
@@ -19,6 +18,7 @@ doko1 = cv2.imread("image/doko1.png")
 doko2 = cv2.imread("image/doko2.png")
 doko3 = cv2.imread("image/doko3.png")
 doko4 = cv2.imread("image/doko4.png")
+doko = np.array([doko0, doko1, doko2, doko3, doko4])
 
 kiyoshi = cv2.imread("image/kiyoshi.png")
 
@@ -28,6 +28,7 @@ def image(img, fps=33) :
 	if key == 27 :			# push esc
 		cv2.destroyAllWindows()
 		sys.exit()
+	time.sleep(0.1)
 
 while True :					# 無限ループ
 	a = random.randint(1,2)		# ランダムで()内の範囲の数値をint型で代入
@@ -43,21 +44,11 @@ while True :					# 無限ループ
 		flag2 = 1
 
 	if flag2 == 0 :
-		image(zun[l])
-
+		image(zun[flag1 - 1])
 	elif flag2 == 1 :
-		if flag1 == 0 :
-			image(doko0)
-		elif flag1 == 1 :
-			image(doko1)
-		elif flag1 == 2 :
-			image(doko2)
-		elif flag1 == 3 :
-			image(doko3)
-		if flag1 < 4 :
+		image(doko[flag1])
+		if flag1 != 4 :
 			flag1 = 0
-	time.sleep(0.05)
-
-	if flag1 == 4 and flag2 == 1 :			# ズンが４回連続した後にドコが来た場合，キ・ヨ・シ！！と出力
+		else :
 			print ("キ・ヨ・シ！！")
 			image(kiyoshi, fps=0)

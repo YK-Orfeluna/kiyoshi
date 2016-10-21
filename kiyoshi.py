@@ -35,25 +35,22 @@ kiyoshi = cv2.imread("image/kiyoshi.png")
 while True :					# 無限ループ
 	a = random.randint(1,2)		# ランダムで()内の範囲の数値をint型で代入
 
-	if a == 1 :
-		print ("ズン")
-		if flag1 > 4 :
-			flag1 = 0
-		else :
-			flag1 += 1
+	if flag1 == 4 and flag2 == 1 :
+		image(kiyoshi, 0)
+	elif flag2 == 1 :
+		flag1 = 0
 		flag2 = 0
+	
+	if a == 1 :
+		flag1 += 1
+		if flag1 == 5 :
+			flag1 = 0
 	else :
-		print ("ドコ")
-		flag2 = 1
+		flag2 += 1
+
+	print flag1, flag2
 
 	if flag2 == 0 :
 		zun[flag1 - 1]
-		time.sleep(0.05)
-	elif flag2 == 1 :
+	else :
 		doko[flag1]
-		if flag1 != 4 :
-			flag1 = 0
-		time.sleep(0.05)
-	if flag1 == 4 and flag2 == 1 :			# ズンが４回連続した後にドコが来た場合，キ・ヨ・シ！！と出力
-			print ("キ・ヨ・シ！！")
-			image(kiyoshi, 0)
